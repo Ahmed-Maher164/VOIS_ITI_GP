@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Preparation') {
+            steps {
+                git credentialsId: 'GithubCredintials', url: 'https://github.com/Ahmed-Maher164/VOIS-js.git'
+            }
+        }
+       
+        stage('CI') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DockerhubCredintials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                    sh 'docker build -t maher164/nodeapp .'
+                    sh 'docker push maher164/nodeapp'
+                }
+            }
+        }
+        
+
+       
+    }
+}
+
