@@ -25,11 +25,19 @@ resource "kubernetes_ingress" "my_ingress" {
 
       http {
         path {
-          path = "/testjenkins"
+          path = "/jenkinsapp"
           backend {
-            service_name = "jenkins-service"
-            service_port = 8080
+            service_name = "m-jenkins-service"
+            service_port = 4040
           }
+        }
+        path {
+          path = "/nodeapp"
+          backend {
+            service_name = "nodeapp-service"
+            service_port = 3000
+         
+         }
         }
 
       }

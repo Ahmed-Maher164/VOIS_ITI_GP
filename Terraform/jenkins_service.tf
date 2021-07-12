@@ -1,6 +1,6 @@
 resource "kubernetes_service" "jenkins-service" {
   metadata {
-    name      = "jenkins-service"
+    name      = "m-jenkins-service"
     namespace = "m-namespace"
   }
 
@@ -10,7 +10,7 @@ resource "kubernetes_service" "jenkins-service" {
       test = "jenkinsApp"
     }
     port {
-      port        = 8080
+      port        = 4040
       target_port = 8080
     }
 
